@@ -61,7 +61,7 @@ val Entity.isStandingInMidAir: Boolean
  * @throws NullPointerException if the entity doesn't have a max health value
  */
 val LivingEntity.realMaxHealth: Double
-    get() = getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value
+    get() = getAttribute(Attribute.MAX_HEALTH)?.value
         ?: throw NullPointerException("The entity does not have a max health value!")
 
 /**
@@ -76,7 +76,7 @@ fun Damageable.kill() {
  * @throws NullPointerException if the entity does not have a max health value
  */
 fun LivingEntity.heal() {
-    health = getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value
+    health = getAttribute(Attribute.MAX_HEALTH)?.value
         ?: throw NullPointerException("The entity does not have a max health value!")
 }
 
