@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val githubRepo = "jakobkmar/KSpigot"
 
 group = "net.axay"
-version = "1.21.0"
+version = "1.21.1"
 
 description = "A Kotlin API for Minecraft plugins using the Spigot or Paper toolchain"
 
