@@ -10,7 +10,7 @@ import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.block.data.BlockData
-import org.bukkit.craftbukkit.v1_20_R2.entity.CraftEntity
+import org.bukkit.craftbukkit.entity.CraftEntity
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
 
@@ -53,6 +53,7 @@ data class StructureDataBlock(
 }
 
 @NMS_General
+@Deprecated("Does not work.")
 data class StructureDataEntity(
     val entityType: EntityType,
     val nbtData: CompoundTag,
@@ -62,7 +63,7 @@ data class StructureDataEntity(
 
     @Suppress("DEPRECATION")
     override fun createAt(loc: Location) {
-        (loc.spawnCleanEntity(entityType) as CraftEntity).handle.load(nbtData)
+
     }
 }
 

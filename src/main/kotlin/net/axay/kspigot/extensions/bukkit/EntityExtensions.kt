@@ -12,6 +12,7 @@ import net.kyori.adventure.title.Title
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.attribute.Attribute
+import org.bukkit.craftbukkit.entity.CraftEntity
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.Damageable
 import org.bukkit.entity.Entity
@@ -61,7 +62,7 @@ val Entity.isStandingInMidAir: Boolean
  * @throws NullPointerException if the entity doesn't have a max health value
  */
 val LivingEntity.realMaxHealth: Double
-    get() = getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value
+    get() = getAttribute(Attribute.MAX_HEALTH)?.value
         ?: throw NullPointerException("The entity does not have a max health value!")
 
 /**
@@ -76,7 +77,7 @@ fun Damageable.kill() {
  * @throws NullPointerException if the entity does not have a max health value
  */
 fun LivingEntity.heal() {
-    health = getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value
+    health = getAttribute(Attribute.MAX_HEALTH)?.value
         ?: throw NullPointerException("The entity does not have a max health value!")
 }
 
@@ -138,10 +139,10 @@ fun Player.showOnlinePlayers() {
 @Deprecated("This function is unstable and it cannot be guaranteed that it will work at any time in the future.")
 @NMS_General
 fun Location.spawnCleanEntity(entityType: EntityType): Entity? {
-    val craftWorld = world as? org.bukkit.craftbukkit.v1_20_R2.CraftWorld ?: return null
-    return craftWorld.createEntity(this, entityType.entityClass)?.let {
-        craftWorld.handle.addFreshEntity(it)
-        return@let it.bukkitEntity
+    val craftWorld = world as? org.bukkit.craftbukkit.CraftWorld ?: return null
+    return craftWorld.createEntity(this, entityType.entityClass!!).let {
+        craftWorld.handle.addFreshEntity((it as CraftEntity).handle)
+        return@let it
     }
 }
 
