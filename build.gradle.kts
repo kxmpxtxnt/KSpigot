@@ -39,10 +39,6 @@ kotlin {
 }
 
 tasks {
-    assemble {
-        dependsOn(reobfJar)
-    }
-
     withType<JavaCompile> {
         options.encoding = "UTF-8"
         options.release.set(21)
@@ -73,7 +69,6 @@ publishing {
     publications {
         register<MavenPublication>(project.name) {
             from(components["java"])
-            artifact(tasks.jar.get().outputs.files.single())
 
             this.groupId = project.group.toString()
             this.artifactId = project.name.lowercase()
